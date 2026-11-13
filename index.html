@@ -117,40 +117,6 @@
       .book-stack { transform: scale(.85) rotate(-7deg); }
       .section { padding: 58px 0; }
     }
-
-    .market-tools { max-width: 850px; margin: 0 auto 24px; }
-    .market-actions { display:flex; justify-content:space-between; align-items:center; gap:12px; margin: 0 4px 22px; }
-    .results-count,.catalog-note { color:#607568; font-size:.9rem; }
-    .books { align-items:stretch; }
-    .book-card { padding:12px; overflow:hidden; transition:transform .22s ease, box-shadow .22s ease; }
-    .book-card:hover { transform:translateY(-5px); box-shadow:0 18px 36px rgba(14,59,38,.15); }
-    .real-cover { width:100%; height:225px; object-fit:contain; display:block; background:#f2f5ef; border-radius:14px; padding:10px; }
-    .book-info { padding:12px 4px 4px; }
-    .book-tag { display:inline-block; padding:4px 10px; border-radius:999px; background:#edf5e8; color:#39752c; font-size:.75rem; font-weight:800; margin-bottom:8px; }
-    .book-card h3 { min-height:2.4em; }
-    .catalog-note { text-align:center; margin:22px 0 0; }
-    .small-btn { transition:transform .18s ease, background .18s ease; }
-    .small-btn:hover { transform:scale(1.04); background:#94df58; }
-    .modal-backdrop { position:fixed; inset:0; background:rgba(7,28,18,.55); display:none; align-items:center; justify-content:center; padding:18px; z-index:50; }
-    .modal-backdrop.open { display:flex; animation:fadeIn .18s ease; }
-    .modal { width:min(540px,100%); max-height:90vh; overflow:auto; background:white; border-radius:24px; padding:28px; box-shadow:0 25px 70px rgba(0,0,0,.2); animation:popIn .22s ease; }
-    .modal-head { display:flex; align-items:flex-start; justify-content:space-between; gap:16px; margin-bottom:18px; }
-    .modal-head h2 { font-size:2rem; }
-    .close-modal { border:0; background:#edf3ea; color:var(--forest); border-radius:50%; width:38px; height:38px; font-size:1.3rem; cursor:pointer; }
-    .form-grid { display:grid; gap:13px; }
-    .form-field { display:grid; gap:6px; color:#385746; font-weight:800; font-size:.92rem; }
-    .form-field input,.form-field select,.form-field textarea { width:100%; border:1px solid #d6e2d5; border-radius:12px; padding:12px 13px; color:var(--forest); background:#fbfcfa; outline:none; }
-    .form-field input:focus,.form-field select:focus,.form-field textarea:focus { border-color:#65a83b; box-shadow:0 0 0 3px rgba(101,168,59,.13); }
-    .form-hint { color:#748477; font-size:.82rem; margin:0; font-weight:400; }
-    .preview-cover { display:none; max-height:130px; max-width:100px; object-fit:contain; border-radius:8px; }
-    .modal-actions { display:flex; gap:10px; justify-content:flex-end; margin-top:8px; flex-wrap:wrap; }
-    .btn.secondary { background:#edf3ea; }
-    .toast { max-width:calc(100% - 32px); text-align:center; }
-    @keyframes fadeIn { from {opacity:0} to {opacity:1} }
-    @keyframes popIn { from {opacity:0; transform:translateY(12px) scale(.98)} to {opacity:1; transform:translateY(0) scale(1)} }
-    @media (prefers-reduced-motion: reduce) { *,*::before,*::after {scroll-behavior:auto!important;animation:none!important;transition:none!important} }
-    @media (max-width:540px) { .market-actions {align-items:flex-start; flex-direction:column;} .real-cover {height:250px;} .modal {padding:22px;} }
-
   </style>
 </head>
 <body>
@@ -163,7 +129,7 @@
         <a href="#explorar">Explorar libros</a>
         <a href="#comunidad">Comunidad</a>
       </nav>
-      <button class="btn" id="openPublishTop" type="button">＋ Subir libro</button>
+      <a class="btn" href="#explorar">Encuentra tu próximo libro ↗</a>
       <button class="menu" id="menu" aria-label="Abrir menú" aria-expanded="false">☰</button>
     </div>
   </header>
@@ -177,7 +143,7 @@
           <p>Publica el libro que ya leíste y encuentra el siguiente a pocos kilómetros de ti. Ahorra dinero, comparte conocimiento y dale otra vida a tus libros.</p>
           <div class="hero-actions">
             <a class="btn dark" href="#explorar">Explorar libros <span>→</span></a>
-            <button class="btn" id="openPublishHero" type="button">＋ Vender o intercambiar</button>
+            <a class="btn" href="#como-funciona">¿Cómo funciona?</a>
           </div>
           <span class="note">Tu próxima historia está más cerca de lo que crees ✎</span>
         </div>
@@ -210,76 +176,36 @@
         <div class="section-head">
           <span class="eyebrow">EL SIGUIENTE LIBRO TE ESPERA</span>
           <h2>Explora la comunidad</h2>
-          <p>Encuentra lecturas de segunda mano o publica los libros que ya no necesitas.</p>
+          <p>Busca por título, materia o categoría. Estos ejemplos muestran cómo se verá el catálogo.</p>
         </div>
-        <div class="market-tools">
-          <div class="searchbar">
-            <input id="search" type="search" placeholder="Buscar por título, autor o materia..." aria-label="Buscar libros">
-            <button class="btn dark" id="searchBtn" type="button">Buscar</button>
-          </div>
-          <div class="chips" aria-label="Filtrar libros">
-            <button class="chip active" data-filter="todos" type="button">Todos</button>
-            <button class="chip" data-filter="novela" type="button">Novela</button>
-            <button class="chip" data-filter="lectura" type="button">Lectura</button>
-            <button class="chip" data-filter="estudio" type="button">Estudio</button>
-          </div>
-          <div class="market-actions">
-            <span id="resultsCount" class="results-count">6 libros disponibles</span>
-            <button class="btn dark" id="openPublishMarket" type="button">＋ Subir mi libro</button>
-          </div>
+        <div class="searchbar">
+          <input id="search" type="search" placeholder="¿Qué te apetece leer?" aria-label="Buscar libros">
+          <button class="btn dark" id="searchBtn">Buscar</button>
+        </div>
+        <div class="chips" aria-label="Filtrar libros">
+          <button class="chip active" data-filter="todos">Todos</button>
+          <button class="chip" data-filter="novela">Novela</button>
+          <button class="chip" data-filter="estudio">Estudio</button>
+          <button class="chip" data-filter="diseño">Diseño</button>
         </div>
         <div class="books" id="books">
-          <article class="book-card" data-category="lectura" data-search="el principito antoine de saint-exupery literatura">
-            <img class="real-cover" src="https://covers.openlibrary.org/b/isbn/9780156012195-L.jpg" alt="Portada de El principito" loading="lazy">
-            <div class="book-info">
-              <span class="book-tag">Lectura</span><h3>El principito</h3>
-              <p class="meta">Antoine de Saint-Exupéry · Buen estado</p>
-              <div class="card-bottom"><span class="price">Intercambio</span><button class="small-btn contact" type="button" data-book="El principito">Me interesa</button></div>
-            </div>
+          <article class="book-card" data-category="novela" data-search="el principito novela fantasia">
+            <div class="cover green"><span>EL<br>PRINCIPITO</span></div>
+            <h3>El principito</h3><p class="meta">Novela · Buen estado</p>
+            <div class="card-bottom"><span class="price">Intercambio</span><button class="small-btn contact">Me interesa</button></div>
           </article>
-          <article class="book-card" data-category="novela" data-search="la sombra del viento carlos ruiz zafon novela">
-            <img class="real-cover" src="https://covers.openlibrary.org/b/isbn/9788408172178-L.jpg" alt="Portada de La sombra del viento" loading="lazy">
-            <div class="book-info">
-              <span class="book-tag">Novela</span><h3>La sombra del viento</h3>
-              <p class="meta">Carlos Ruiz Zafón · Muy buen estado</p>
-              <div class="card-bottom"><span class="price">9 €</span><button class="small-btn contact" type="button" data-book="La sombra del viento">Me interesa</button></div>
-            </div>
+          <article class="book-card" data-category="estudio" data-search="introduccion psicologia estudio apuntes">
+            <div class="cover blue"><span>INTRODUCCIÓN<br>A LA PSICOLOGÍA</span></div>
+            <h3>Introducción a la psicología</h3><p class="meta">Estudio · Muy buen estado</p>
+            <div class="card-bottom"><span class="price">12 €</span><button class="small-btn contact">Me interesa</button></div>
           </article>
-          <article class="book-card" data-category="lectura" data-search="matilda roald dahl literatura infantil">
-            <img class="real-cover" src="https://covers.openlibrary.org/b/isbn/9788498383391-L.jpg" alt="Portada de Matilda" loading="lazy">
-            <div class="book-info">
-              <span class="book-tag">Lectura</span><h3>Matilda</h3>
-              <p class="meta">Roald Dahl · Buen estado</p>
-              <div class="card-bottom"><span class="price">6 €</span><button class="small-btn contact" type="button" data-book="Matilda">Me interesa</button></div>
-            </div>
-          </article>
-          <article class="book-card" data-category="novela" data-search="harry potter y la piedra filosofal j k rowling fantasia">
-            <img class="real-cover" src="https://covers.openlibrary.org/b/isbn/9788478884452-L.jpg" alt="Portada de Harry Potter y la piedra filosofal" loading="lazy">
-            <div class="book-info">
-              <span class="book-tag">Novela</span><h3>Harry Potter y la piedra filosofal</h3>
-              <p class="meta">J. K. Rowling · Buen estado</p>
-              <div class="card-bottom"><span class="price">8 €</span><button class="small-btn contact" type="button" data-book="Harry Potter y la piedra filosofal">Me interesa</button></div>
-            </div>
-          </article>
-          <article class="book-card" data-category="lectura" data-search="don quijote de la mancha miguel de cervantes clasico">
-            <img class="real-cover" src="https://covers.openlibrary.org/b/isbn/9788420412146-L.jpg" alt="Portada de Don Quijote de la Mancha" loading="lazy">
-            <div class="book-info">
-              <span class="book-tag">Lectura</span><h3>Don Quijote de la Mancha</h3>
-              <p class="meta">Miguel de Cervantes · Buen estado</p>
-              <div class="card-bottom"><span class="price">Intercambio</span><button class="small-btn contact" type="button" data-book="Don Quijote de la Mancha">Me interesa</button></div>
-            </div>
-          </article>
-          <article class="book-card" data-category="estudio" data-search="atlas de anatomia humana frank netter anatomia estudio">
-            <img class="real-cover" src="https://covers.openlibrary.org/b/isbn/9788445826072-L.jpg" alt="Portada del Atlas de anatomía humana" loading="lazy">
-            <div class="book-info">
-              <span class="book-tag">Estudio</span><h3>Atlas de anatomía humana</h3>
-              <p class="meta">Frank H. Netter · Muy buen estado</p>
-              <div class="card-bottom"><span class="price">15 €</span><button class="small-btn contact" type="button" data-book="Atlas de anatomía humana">Me interesa</button></div>
-            </div>
+          <article class="book-card" data-category="diseño" data-search="fundamentos diseño diseño creatividad">
+            <div class="cover orange"><span>FUNDAMENTOS<br>DEL DISEÑO</span></div>
+            <h3>Fundamentos del diseño</h3><p class="meta">Diseño · Buen estado</p>
+            <div class="card-bottom"><span class="price">8 €</span><button class="small-btn contact">Me interesa</button></div>
           </article>
         </div>
         <p class="empty" id="empty">No encontramos libros con esa búsqueda. Prueba con otra palabra.</p>
-        <p class="catalog-note">Las portadas se cargan desde Open Library. Los anuncios son ejemplos de demostración, no ofertas verificadas de vendedores reales.</p>
       </div>
     </section>
 
@@ -305,58 +231,25 @@
   </main>
 
   <footer><div class="container footer-inner"><a class="logo" href="#inicio">libri<span>swap</span></a><span>Comparte tu conocimiento · Hecho para dar más vidas a los libros 🌱</span><span>© <span id="year"></span> Libriswap</span></div></footer>
-
-  <div class="modal-backdrop" id="publishModal" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
-    <div class="modal">
-      <div class="modal-head">
-        <div><span class="eyebrow">DALE OTRA VIDA</span><h2 id="modalTitle">Sube tu libro</h2><p class="form-hint">Completa los datos para crear una ficha en este catálogo de demostración.</p></div>
-        <button class="close-modal" id="closePublish" type="button" aria-label="Cerrar">×</button>
-      </div>
-      <form id="publishForm" class="form-grid">
-        <label class="form-field">Título del libro<input name="title" required maxlength="90" placeholder="Ej. Biología y Geología 1 Bachillerato"></label>
-        <label class="form-field">Autor o editorial<input name="author" required maxlength="90" placeholder="Nombre del autor o editorial"></label>
-        <label class="form-field">¿Qué quieres hacer?
-          <select name="mode" required><option value="Vender">Vender</option><option value="Intercambiar">Intercambiar</option><option value="Regalar">Regalar</option></select>
-        </label>
-        <label class="form-field">Precio (€)<input name="price" type="number" min="0" step="0.50" placeholder="Ej. 8"></label>
-        <label class="form-field">Categoría<select name="category"><option value="estudio">Estudio</option><option value="novela">Novela</option><option value="lectura">Lectura</option></select></label>
-        <label class="form-field">Estado<select name="condition"><option>Como nuevo</option><option>Muy buen estado</option><option>Buen estado</option><option>Con marcas de uso</option></select></label>
-        <label class="form-field">Foto de la portada<input id="coverUpload" name="cover" type="file" accept="image/*"><span class="form-hint">Opcional. La imagen se mostrará solo en esta sesión.</span><img id="coverPreview" class="preview-cover" alt="Vista previa de la portada"></label>
-        <label class="form-field">Descripción (opcional)<textarea name="description" rows="2" maxlength="240" placeholder="Añade detalles sobre el libro..."></textarea></label>
-        <div class="modal-actions"><button class="btn secondary" id="cancelPublish" type="button">Cancelar</button><button class="btn dark" type="submit">Publicar libro ↗</button></div>
-      </form>
-    </div>
-  </div>
-  <div class="modal-backdrop" id="interestModal" role="dialog" aria-modal="true" aria-labelledby="interestTitle">
-    <div class="modal">
-      <div class="modal-head"><div><span class="eyebrow">LIBRISWAP</span><h2 id="interestTitle">¡Te interesa este libro!</h2></div><button class="close-modal" id="closeInterest" type="button" aria-label="Cerrar">×</button></div>
-      <p id="interestText">Has seleccionado un libro.</p>
-      <p class="form-hint">En una versión conectada, aquí podrías contactar con la persona que lo ha publicado. Por ahora es una demostración: no se envían mensajes ni se realizan pagos.</p>
-      <div class="modal-actions"><button class="btn dark" id="interestOk" type="button">Entendido</button></div>
-    </div>
-  </div>
-
   <div class="toast" id="toast" role="status" aria-live="polite"></div>
 
   <script>
     const search = document.getElementById('search');
-    const booksGrid = document.getElementById('books');
+    const cards = [...document.querySelectorAll('.book-card')];
     const chips = [...document.querySelectorAll('.chip')];
     let activeFilter = 'todos';
 
     function filterBooks() {
       const term = search.value.trim().toLocaleLowerCase('es');
-      const cards = [...booksGrid.querySelectorAll('.book-card')];
       let visible = 0;
       cards.forEach(card => {
-        const matchesText = (card.dataset.search || '').includes(term);
+        const matchesText = card.dataset.search.includes(term);
         const matchesCategory = activeFilter === 'todos' || card.dataset.category === activeFilter;
         const show = matchesText && matchesCategory;
-        card.hidden = !show;
+        card.style.display = show ? '' : 'none';
         if (show) visible++;
       });
       document.getElementById('empty').style.display = visible ? 'none' : 'block';
-      document.getElementById('resultsCount').textContent = `${visible} ${visible === 1 ? 'libro disponible' : 'libros disponibles'}`;
     }
     document.getElementById('searchBtn').addEventListener('click', filterBooks);
     search.addEventListener('input', filterBooks);
@@ -368,87 +261,11 @@
     }));
 
     const toast = document.getElementById('toast');
-    let toastTimer;
-    function showToast(message) {
-      toast.textContent = message;
+    document.querySelectorAll('.contact').forEach(button => button.addEventListener('click', () => {
+      toast.textContent = '¡Genial! La función de contacto se conectará cuando añadas tu sistema de usuarios.';
       toast.classList.add('show');
-      clearTimeout(toastTimer);
-      toastTimer = setTimeout(() => toast.classList.remove('show'), 3000);
-    }
-
-    const publishModal = document.getElementById('publishModal');
-    const interestModal = document.getElementById('interestModal');
-    function openModal(modal) { modal.classList.add('open'); document.body.style.overflow = 'hidden'; }
-    function closeModal(modal) { modal.classList.remove('open'); document.body.style.overflow = ''; }
-    ['openPublishTop','openPublishHero','openPublishMarket'].forEach(id => {
-      document.getElementById(id).addEventListener('click', () => openModal(publishModal));
-    });
-    ['closePublish','cancelPublish'].forEach(id => document.getElementById(id).addEventListener('click', () => closeModal(publishModal)));
-    ['closeInterest','interestOk'].forEach(id => document.getElementById(id).addEventListener('click', () => closeModal(interestModal)));
-    [publishModal, interestModal].forEach(modal => modal.addEventListener('click', e => {
-      if (e.target === modal) closeModal(modal);
+      setTimeout(() => toast.classList.remove('show'), 3200);
     }));
-    document.addEventListener('keydown', e => {
-      if (e.key === 'Escape') { closeModal(publishModal); closeModal(interestModal); }
-    });
-
-    const coverInput = document.getElementById('coverUpload');
-    const coverPreview = document.getElementById('coverPreview');
-    let uploadedCover = '';
-    coverInput.addEventListener('change', () => {
-      const file = coverInput.files[0];
-      if (!file) { uploadedCover = ''; coverPreview.style.display = 'none'; return; }
-      if (!file.type.startsWith('image/')) { showToast('Selecciona un archivo de imagen.'); coverInput.value = ''; return; }
-      const reader = new FileReader();
-      reader.onload = () => { uploadedCover = reader.result; coverPreview.src = uploadedCover; coverPreview.style.display = 'block'; };
-      reader.readAsDataURL(file);
-    });
-
-    document.getElementById('publishForm').addEventListener('submit', event => {
-      event.preventDefault();
-      const form = event.currentTarget;
-      if (!form.reportValidity()) return;
-      const data = new FormData(form);
-      const title = String(data.get('title')).trim();
-      const author = String(data.get('author')).trim();
-      const mode = String(data.get('mode'));
-      const category = String(data.get('category'));
-      const price = String(data.get('price')).trim();
-      const condition = String(data.get('condition'));
-      const description = String(data.get('description')).trim();
-      const card = document.createElement('article');
-      card.className = 'book-card';
-      card.dataset.category = category;
-      card.dataset.search = `${title} ${author} ${category} ${description}`.toLocaleLowerCase('es');
-      const image = document.createElement('img');
-      image.className = 'real-cover';
-      image.alt = `Portada de ${title}`;
-      image.loading = 'lazy';
-      image.src = uploadedCover || 'https://placehold.co/300x420/eaf1e8/0e3b26?text=Mi+libro';
-      image.onerror = () => { image.src = 'https://placehold.co/300x420/eaf1e8/0e3b26?text=Mi+libro'; };
-      const info = document.createElement('div'); info.className = 'book-info';
-      const tag = document.createElement('span'); tag.className = 'book-tag'; tag.textContent = category[0].toUpperCase() + category.slice(1);
-      const heading = document.createElement('h3'); heading.textContent = title;
-      const meta = document.createElement('p'); meta.className = 'meta'; meta.textContent = `${author} · ${condition}`;
-      const bottom = document.createElement('div'); bottom.className = 'card-bottom';
-      const amount = document.createElement('span'); amount.className = 'price';
-      amount.textContent = mode === 'Intercambiar' || mode === 'Regalar' ? mode : (price ? `${price} €` : 'Precio negociable');
-      const button = document.createElement('button'); button.className = 'small-btn contact'; button.type = 'button'; button.dataset.book = title; button.textContent = 'Me interesa';
-      bottom.append(amount, button); info.append(tag, heading, meta, bottom); card.append(image, info);
-      booksGrid.prepend(card);
-      form.reset(); uploadedCover = ''; coverPreview.style.display = 'none';
-      closeModal(publishModal);
-      activeFilter = 'todos'; chips.forEach(item => item.classList.toggle('active', item.dataset.filter === 'todos'));
-      search.value = ''; filterBooks();
-      showToast('¡Tu libro se ha añadido al catálogo de esta sesión!');
-    });
-
-    booksGrid.addEventListener('click', event => {
-      const button = event.target.closest('.contact');
-      if (!button) return;
-      document.getElementById('interestText').textContent = `Has mostrado interés por «${button.dataset.book}».`;
-      openModal(interestModal);
-    });
 
     const menu = document.getElementById('menu');
     const navlinks = document.getElementById('navlinks');
@@ -463,7 +280,6 @@
       menu.textContent = '☰';
     }));
     document.getElementById('year').textContent = new Date().getFullYear();
-    filterBooks();
   </script>
 </body>
 </html>
