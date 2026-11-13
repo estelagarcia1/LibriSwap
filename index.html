@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#0E3B26">
+  <meta name="description" content="Libriswap: comparte tu conocimiento. Compra, vende e intercambia libros y apuntes cerca de ti.">
+  <title>Libriswap — Libros + Amigos + Un planeta mejor</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;700;800&family=Caveat+Brush&family=Nunito+Sans:wght@400;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --forest: #0E3B26;
+      --swap: #55A22A;
+      --lime: #A8F06E;
+      --ink: #12305C;
+      --sky: #CFE6F5;
+      --paper: #F5F7F2;
+      --white: #fff;
+      --radius: 24px;
+      --shadow: 0 14px 40px rgba(14,59,38,.10);
+    }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body { margin: 0; background: var(--paper); color: var(--forest); font-family: "Nunito Sans", sans-serif; line-height: 1.6; }
+    a { color: inherit; text-decoration: none; }
+    button, input { font: inherit; }
+    .container { width: min(1120px, calc(100% - 40px)); margin: auto; }
+    .topbar { background: var(--forest); color: white; text-align: center; padding: 8px 16px; font-size: .88rem; }
+    header { position: sticky; top: 0; z-index: 10; background: rgba(245,247,242,.94); backdrop-filter: blur(12px); border-bottom: 1px solid rgba(14,59,38,.08); }
+    .nav { min-height: 78px; display: flex; align-items: center; justify-content: space-between; gap: 24px; }
+    .logo { font: 800 2rem/1 "Baloo 2", sans-serif; letter-spacing: -1.5px; color: var(--forest); }
+    .logo span { color: var(--swap); }
+    .navlinks { display: flex; gap: 28px; align-items: center; font-weight: 700; font-size: .95rem; }
+    .navlinks a:hover { color: var(--swap); }
+    .btn { display: inline-flex; align-items: center; justify-content: center; gap: 9px; border: 0; border-radius: 999px; padding: 13px 22px; background: var(--lime); color: var(--forest); font-weight: 800; cursor: pointer; transition: transform .2s, box-shadow .2s; }
+    .btn:hover { transform: translateY(-2px); box-shadow: 0 8px 20px rgba(14,59,38,.14); }
+    .btn.dark { background: var(--forest); color: white; }
+    .menu { display: none; border: 0; background: transparent; color: var(--forest); font-size: 1.7rem; cursor: pointer; }
+    .hero { padding: 76px 0 82px; overflow: hidden; }
+    .hero-grid { display: grid; grid-template-columns: 1.08fr .92fr; align-items: center; gap: 55px; }
+    .eyebrow { display: inline-block; color: var(--forest); background: var(--lime); border-radius: 999px; padding: 7px 14px; font-size: .78rem; font-weight: 800; letter-spacing: .08em; }
+    h1, h2, h3 { font-family: "Baloo 2", sans-serif; line-height: 1.08; margin: 0; }
+    h1 { font-size: clamp(3.2rem, 6vw, 5.4rem); letter-spacing: -2px; margin: 20px 0; }
+    h1 span { color: var(--swap); }
+    .hero p { max-width: 540px; font-size: 1.15rem; color: #385746; margin: 0 0 28px; }
+    .hero-actions { display: flex; flex-wrap: wrap; gap: 12px; }
+    .note { display: block; font: 1.55rem "Caveat Brush", cursive; color: var(--swap); margin-top: 20px; transform: rotate(-3deg); }
+    .hero-art { position: relative; min-height: 410px; display: grid; place-items: center; }
+    .art-circle { width: min(390px, 88vw); aspect-ratio: 1; border-radius: 50%; background: var(--sky); position: absolute; }
+    .book-stack { position: relative; width: 270px; height: 260px; transform: rotate(-7deg); }
+    .book { position: absolute; width: 220px; height: 72px; border: 5px solid var(--forest); border-radius: 12px 18px 18px 12px; box-shadow: 8px 9px 0 rgba(14,59,38,.12); }
+    .book::after { content: ""; position: absolute; left: 18px; top: 8px; bottom: 8px; width: 5px; background: rgba(255,255,255,.7); border-radius: 5px; }
+    .book.one { background: var(--lime); top: 25px; left: 15px; transform: rotate(8deg); }
+    .book.two { background: #F3B56B; top: 105px; left: 35px; transform: rotate(-5deg); }
+    .book.three { background: #9BC8E5; top: 185px; left: 5px; transform: rotate(5deg); }
+    .orbit { position: absolute; font-size: 3rem; color: var(--forest); }
+    .orbit.star { top: 12px; right: 16px; color: var(--swap); }
+    .orbit.heart { bottom: 26px; right: 22px; color: #E98C6B; }
+    .scribble { position: absolute; bottom: 2px; left: 5px; font: 1.7rem "Caveat Brush", cursive; color: var(--swap); transform: rotate(-8deg); }
+    .section { padding: 78px 0; }
+    .section-head { text-align: center; max-width: 650px; margin: 0 auto 38px; }
+    .section-head h2 { font-size: clamp(2.3rem, 4vw, 3.5rem); margin: 12px 0; }
+    .section-head p { color: #557061; margin: 0; }
+    .benefits { display: grid; grid-template-columns: repeat(3,1fr); gap: 18px; }
+    .benefit { background: white; border-radius: var(--radius); padding: 28px; box-shadow: var(--shadow); }
+    .benefit-icon { width: 54px; height: 54px; display: grid; place-items: center; border-radius: 50%; background: var(--lime); font-size: 1.6rem; margin-bottom: 18px; }
+    .benefit h3 { font-size: 1.55rem; margin-bottom: 8px; }
+    .benefit p { color: #607568; margin: 0; }
+    .market { background: #EAF1E8; }
+    .searchbar { display: flex; gap: 10px; max-width: 650px; margin: 0 auto 28px; background: white; border: 1px solid #dce7dc; border-radius: 999px; padding: 7px; }
+    .searchbar input { min-width: 0; flex: 1; border: 0; outline: 0; padding: 8px 15px; background: transparent; color: var(--forest); }
+    .chips { display: flex; justify-content: center; flex-wrap: wrap; gap: 9px; margin-bottom: 28px; }
+    .chip { border: 1px solid #c8d9c9; border-radius: 999px; padding: 8px 16px; background: transparent; color: var(--forest); cursor: pointer; font-weight: 700; }
+    .chip.active, .chip:hover { background: var(--forest); color: white; border-color: var(--forest); }
+    .books { display: grid; grid-template-columns: repeat(3,1fr); gap: 20px; }
+    .book-card { background: white; border-radius: 20px; padding: 16px; box-shadow: var(--shadow); }
+    .cover { height: 190px; display: grid; place-items: center; border-radius: 14px; margin-bottom: 15px; overflow: hidden; }
+    .cover span { font: 800 1.6rem/1.1 "Baloo 2", sans-serif; text-align: center; width: 75%; color: var(--forest); }
+    .cover.green { background: #B8DC9B; } .cover.blue { background: #B8D8EB; } .cover.orange { background: #F4C28D; }
+    .book-card h3 { font-size: 1.35rem; }
+    .meta { color: #6C7D72; font-size: .9rem; margin: 3px 0 12px; }
+    .card-bottom { display: flex; align-items: center; justify-content: space-between; gap: 10px; }
+    .price { color: var(--ink); font-weight: 800; }
+    .small-btn { border: 0; background: var(--lime); color: var(--forest); padding: 9px 14px; border-radius: 999px; font-weight: 800; cursor: pointer; }
+    .empty { display: none; text-align: center; color: #607568; padding: 24px; }
+    .steps { display: grid; grid-template-columns: repeat(3,1fr); gap: 25px; counter-reset: step; }
+    .step { position: relative; padding: 12px 15px 12px 74px; }
+    .step::before { counter-increment: step; content: counter(step); position: absolute; left: 0; top: 7px; width: 54px; height: 54px; border-radius: 50%; display: grid; place-items: center; background: var(--lime); font: 800 1.5rem "Baloo 2"; }
+    .step h3 { font-size: 1.45rem; margin-bottom: 7px; }
+    .step p { margin: 0; color: #607568; }
+    .cta { background: var(--forest); color: white; border-radius: 32px; padding: 54px; display: flex; justify-content: space-between; align-items: center; gap: 25px; }
+    .cta h2 { font-size: clamp(2.2rem,4vw,3.4rem); max-width: 600px; }
+    .cta p { color: #d2e2d6; margin-bottom: 0; }
+    footer { padding: 35px 0; color: #688071; font-size: .9rem; }
+    .footer-inner { display: flex; justify-content: space-between; gap: 20px; flex-wrap: wrap; align-items: center; }
+    .toast { position: fixed; bottom: 22px; left: 50%; transform: translate(-50%, 20px); opacity: 0; pointer-events: none; background: var(--forest); color: white; padding: 12px 20px; border-radius: 999px; box-shadow: var(--shadow); transition: .25s; z-index: 20; }
+    .toast.show { opacity: 1; transform: translate(-50%,0); }
+    @media (max-width: 800px) {
+      .hero-grid { grid-template-columns: 1fr; gap: 20px; }
+      .hero { padding-top: 52px; }
+      .hero-art { min-height: 340px; }
+      .benefits, .books, .steps { grid-template-columns: 1fr 1fr; }
+      .navlinks { display: none; position: absolute; top: 78px; left: 0; right: 0; padding: 20px; background: var(--paper); flex-direction: column; align-items: stretch; border-bottom: 1px solid #dce7dc; }
+      .navlinks.open { display: flex; }
+      .menu { display: block; }
+      .nav > .btn { display: none; }
+      .cta { padding: 38px 28px; flex-direction: column; align-items: flex-start; }
+    }
+    @media (max-width: 540px) {
+      .container { width: min(100% - 28px, 1120px); }
+      .benefits, .books, .steps { grid-template-columns: 1fr; }
+      .searchbar { border-radius: 18px; }
+      .searchbar .btn { padding: 10px 15px; }
+      .hero-art { min-height: 300px; }
+      .book-stack { transform: scale(.85) rotate(-7deg); }
+      .section { padding: 58px 0; }
+    }
+  </style>
+</head>
+<body>
+  <div class="topbar">Libros + Amigos + Un planeta mejor 🌱</div>
+  <header>
+    <div class="container nav">
+      <a class="logo" href="#inicio" aria-label="Libriswap, inicio">libri<span>swap</span></a>
+      <nav class="navlinks" id="navlinks" aria-label="Navegación principal">
+        <a href="#como-funciona">Cómo funciona</a>
+        <a href="#explorar">Explorar libros</a>
+        <a href="#comunidad">Comunidad</a>
+      </nav>
+      <a class="btn" href="#explorar">Encuentra tu próximo libro ↗</a>
+      <button class="menu" id="menu" aria-label="Abrir menú" aria-expanded="false">☰</button>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero" id="inicio">
+      <div class="container hero-grid">
+        <div>
+          <span class="eyebrow">INTERCAMBIO · VENTA · COMPRA</span>
+          <h1>Libros que<br><span>viajan.</span> Ideas que<br>conectan.</h1>
+          <p>Publica el libro que ya leíste y encuentra el siguiente a pocos kilómetros de ti. Ahorra dinero, comparte conocimiento y dale otra vida a tus libros.</p>
+          <div class="hero-actions">
+            <a class="btn dark" href="#explorar">Explorar libros <span>→</span></a>
+            <a class="btn" href="#como-funciona">¿Cómo funciona?</a>
+          </div>
+          <span class="note">Tu próxima historia está más cerca de lo que crees ✎</span>
+        </div>
+        <div class="hero-art" aria-label="Ilustración decorativa de libros apilados">
+          <div class="art-circle"></div>
+          <div class="book-stack"><div class="book one"></div><div class="book two"></div><div class="book three"></div></div>
+          <span class="orbit star">✳</span><span class="orbit heart">♡</span>
+          <span class="scribble">¡Una segunda vida para cada libro!</span>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="container">
+        <div class="section-head">
+          <span class="eyebrow">PEQUEÑOS GESTOS, GRANDES CAMBIOS</span>
+          <h2>Leer también es compartir</h2>
+          <p>Cada libro que cambia de manos ahorra dinero, evita residuos y conecta a dos personas que quizá no se habrían conocido.</p>
+        </div>
+        <div class="benefits">
+          <article class="benefit"><div class="benefit-icon">€</div><h3>Ahorra dinero</h3><p>Encuentra lecturas y apuntes a precios accesibles o intercámbialos por algo que te interese.</p></article>
+          <article class="benefit"><div class="benefit-icon">🌱</div><h3>Cuida el planeta</h3><p>Alarga la vida de los libros y ayuda a reducir residuos con cada nuevo intercambio.</p></article>
+          <article class="benefit"><div class="benefit-icon">♡</div><h3>Conecta con otros</h3><p>Comparte recomendaciones, conocimiento y nuevas historias con gente de tu comunidad.</p></article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section market" id="explorar">
+      <div class="container">
+        <div class="section-head">
+          <span class="eyebrow">EL SIGUIENTE LIBRO TE ESPERA</span>
+          <h2>Explora la comunidad</h2>
+          <p>Busca por título, materia o categoría. Estos ejemplos muestran cómo se verá el catálogo.</p>
+        </div>
+        <div class="searchbar">
+          <input id="search" type="search" placeholder="¿Qué te apetece leer?" aria-label="Buscar libros">
+          <button class="btn dark" id="searchBtn">Buscar</button>
+        </div>
+        <div class="chips" aria-label="Filtrar libros">
+          <button class="chip active" data-filter="todos">Todos</button>
+          <button class="chip" data-filter="novela">Novela</button>
+          <button class="chip" data-filter="estudio">Estudio</button>
+          <button class="chip" data-filter="diseño">Diseño</button>
+        </div>
+        <div class="books" id="books">
+          <article class="book-card" data-category="novela" data-search="el principito novela fantasia">
+            <div class="cover green"><span>EL<br>PRINCIPITO</span></div>
+            <h3>El principito</h3><p class="meta">Novela · Buen estado</p>
+            <div class="card-bottom"><span class="price">Intercambio</span><button class="small-btn contact">Me interesa</button></div>
+          </article>
+          <article class="book-card" data-category="estudio" data-search="introduccion psicologia estudio apuntes">
+            <div class="cover blue"><span>INTRODUCCIÓN<br>A LA PSICOLOGÍA</span></div>
+            <h3>Introducción a la psicología</h3><p class="meta">Estudio · Muy buen estado</p>
+            <div class="card-bottom"><span class="price">12 €</span><button class="small-btn contact">Me interesa</button></div>
+          </article>
+          <article class="book-card" data-category="diseño" data-search="fundamentos diseño diseño creatividad">
+            <div class="cover orange"><span>FUNDAMENTOS<br>DEL DISEÑO</span></div>
+            <h3>Fundamentos del diseño</h3><p class="meta">Diseño · Buen estado</p>
+            <div class="card-bottom"><span class="price">8 €</span><button class="small-btn contact">Me interesa</button></div>
+          </article>
+        </div>
+        <p class="empty" id="empty">No encontramos libros con esa búsqueda. Prueba con otra palabra.</p>
+      </div>
+    </section>
+
+    <section class="section" id="como-funciona">
+      <div class="container">
+        <div class="section-head"><span class="eyebrow">ASÍ DE FÁCIL</span><h2>Tu libro, su próxima aventura</h2><p>Dar y encontrar una nueva lectura solo necesita tres pasos.</p></div>
+        <div class="steps">
+          <article class="step"><h3>Publica tu libro</h3><p>Cuéntanos qué libro tienes, añade una foto y elige si quieres venderlo o intercambiarlo.</p></article>
+          <article class="step"><h3>Encuentra el siguiente</h3><p>Explora los libros disponibles y descubre nuevas lecturas cerca de tu zona.</p></article>
+          <article class="step"><h3>Conecta y comparte</h3><p>Contacta con la otra persona y acuerda cómo hacer el intercambio o la entrega.</p></article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="comunidad">
+      <div class="container">
+        <div class="cta">
+          <div><h2>El conocimiento crece cuando se comparte.</h2><p>Publica ese libro que ya has terminado y deja que empiece una nueva historia.</p></div>
+          <a class="btn" href="mailto:hola@libriswap.com?subject=Quiero%20participar%20en%20Libriswap">Quiero participar ↗</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer><div class="container footer-inner"><a class="logo" href="#inicio">libri<span>swap</span></a><span>Comparte tu conocimiento · Hecho para dar más vidas a los libros 🌱</span><span>© <span id="year"></span> Libriswap</span></div></footer>
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+  <script>
+    const search = document.getElementById('search');
+    const cards = [...document.querySelectorAll('.book-card')];
+    const chips = [...document.querySelectorAll('.chip')];
+    let activeFilter = 'todos';
+
+    function filterBooks() {
+      const term = search.value.trim().toLocaleLowerCase('es');
+      let visible = 0;
+      cards.forEach(card => {
+        const matchesText = card.dataset.search.includes(term);
+        const matchesCategory = activeFilter === 'todos' || card.dataset.category === activeFilter;
+        const show = matchesText && matchesCategory;
+        card.style.display = show ? '' : 'none';
+        if (show) visible++;
+      });
+      document.getElementById('empty').style.display = visible ? 'none' : 'block';
+    }
+    document.getElementById('searchBtn').addEventListener('click', filterBooks);
+    search.addEventListener('input', filterBooks);
+    search.addEventListener('keydown', event => { if (event.key === 'Enter') filterBooks(); });
+    chips.forEach(chip => chip.addEventListener('click', () => {
+      activeFilter = chip.dataset.filter;
+      chips.forEach(item => item.classList.toggle('active', item === chip));
+      filterBooks();
+    }));
+
+    const toast = document.getElementById('toast');
+    document.querySelectorAll('.contact').forEach(button => button.addEventListener('click', () => {
+      toast.textContent = '¡Genial! La función de contacto se conectará cuando añadas tu sistema de usuarios.';
+      toast.classList.add('show');
+      setTimeout(() => toast.classList.remove('show'), 3200);
+    }));
+
+    const menu = document.getElementById('menu');
+    const navlinks = document.getElementById('navlinks');
+    menu.addEventListener('click', () => {
+      const open = navlinks.classList.toggle('open');
+      menu.setAttribute('aria-expanded', String(open));
+      menu.textContent = open ? '×' : '☰';
+    });
+    navlinks.querySelectorAll('a').forEach(link => link.addEventListener('click', () => {
+      navlinks.classList.remove('open');
+      menu.setAttribute('aria-expanded', 'false');
+      menu.textContent = '☰';
+    }));
+    document.getElementById('year').textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>
