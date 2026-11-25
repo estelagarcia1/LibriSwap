@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#123d2b">
+  <meta name="description" content="LibriSwap: compra, vende e intercambia libros de texto y lecturas en tu comunidad educativa.">
+  <title>LibriSwap — Una segunda vida para tus libros</title>
+  <style>
+    :root{--forest:#123d2b;--green:#3d8b50;--lime:#c8f078;--mint:#eaf4e8;--paper:#f7f8f3;--ink:#18352a;--muted:#64766b;--line:#dce6dc;--white:#fff;--shadow:0 14px 36px rgba(20,57,39,.09);--radius:22px}
+    *{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:var(--paper);color:var(--ink);font-family:Arial, Helvetica, sans-serif;line-height:1.6}a{color:inherit;text-decoration:none}button,input,select,textarea{font:inherit}button{cursor:pointer}.container{width:min(1160px,calc(100% - 40px));margin:auto}
+    .topbar{background:var(--forest);color:#edf7e9;text-align:center;padding:8px 16px;font-size:.84rem;font-weight:600;letter-spacing:.02em}
+    header{position:sticky;top:0;z-index:20;background:rgba(247,248,243,.94);backdrop-filter:blur(14px);border-bottom:1px solid rgba(18,61,43,.09)}.nav{height:76px;display:flex;align-items:center;justify-content:space-between;gap:22px}.logo{font:800 1.9rem Arial, Helvetica, sans-serif;letter-spacing:-1.5px;color:var(--forest)}.logo span{color:var(--green)}.navlinks{display:flex;gap:28px;align-items:center;font-weight:700;font-size:.93rem}.navlinks a:hover{color:var(--green)}.nav-actions{display:flex;gap:10px;align-items:center}.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;border:0;border-radius:999px;padding:12px 20px;background:var(--lime);color:var(--forest);font-weight:800;transition:.2s;box-shadow:none}.btn:hover{transform:translateY(-2px);box-shadow:0 8px 18px #123d2b1c}.btn.dark{background:var(--forest);color:white}.btn.light{background:white;border:1px solid var(--line)}.menu{display:none;background:none;border:0;font-size:1.7rem;color:var(--forest)}
+    .hero{padding:76px 0 84px;background:radial-gradient(circle at 85% 35%,#e0efda 0,transparent 29%),linear-gradient(120deg,#f7f8f3,#f0f6ec)}.hero-grid{display:grid;grid-template-columns:1fr;align-items:center;gap:20px}.eyebrow{display:inline-flex;align-items:center;gap:7px;border-radius:999px;background:#e4f2d7;color:var(--forest);padding:7px 13px;font-size:.76rem;font-weight:800;letter-spacing:.07em;text-transform:uppercase}.hero h1{font:800 clamp(3rem,6vw,5.25rem)/1.02 Arial, Helvetica, sans-serif;letter-spacing:-3px;margin:19px 0}.hero h1 span{color:var(--green)}.hero p{max-width:570px;color:#52675a;font-size:1.1rem;margin:0 0 27px}.hero-actions{display:flex;gap:12px;flex-wrap:wrap}.hero-note{display:block;color:var(--green);font-weight:700;margin-top:21px;font-size:.92rem}
+    .section{padding:76px 0}.section-head{text-align:center;max-width:680px;margin:0 auto 36px}.section-head h2{font:800 clamp(2.1rem,4vw,3.2rem)/1.12 Arial, Helvetica, sans-serif;letter-spacing:-1.5px;margin:12px 0}.section-head p{color:var(--muted);margin:0}.benefits{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}.benefit{background:white;border:1px solid #edf1e9;border-radius:var(--radius);padding:27px;box-shadow:var(--shadow)}.benefit-icon{width:52px;height:52px;display:grid;place-items:center;border-radius:16px;background:var(--mint);font-size:1.55rem;margin-bottom:16px}.benefit h3{font:800 1.25rem Arial, Helvetica, sans-serif;margin:0 0 7px}.benefit p{color:var(--muted);margin:0;font-size:.95rem}
+    .market{background:#edf4eb}.market .section-head{margin-bottom:28px}.catalog-tools{max-width:900px;margin:0 auto 25px}.searchbar{display:flex;gap:9px;background:white;padding:7px;border:1px solid var(--line);border-radius:17px;box-shadow:0 6px 18px #123d2b0a}.searchbar input{flex:1;min-width:0;border:0;outline:0;padding:9px 13px;background:transparent}.filters{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:12px}.filters select{width:100%;padding:11px 13px;border:1px solid var(--line);border-radius:13px;background:white;color:var(--ink);outline-color:var(--green)}.chips{display:flex;gap:8px;flex-wrap:wrap;justify-content:center;margin:17px 0 27px}.chip{border:1px solid #cbd9ca;background:transparent;border-radius:999px;padding:8px 15px;color:var(--forest);font-weight:700}.chip.active,.chip:hover{background:var(--forest);color:white;border-color:var(--forest)}.results-line{display:flex;justify-content:space-between;align-items:center;gap:12px;margin:0 0 14px;color:var(--muted);font-size:.9rem}.books{display:grid;grid-template-columns:repeat(3,1fr);gap:19px}.book-card{background:white;border:1px solid #e7eee5;border-radius:20px;padding:13px;box-shadow:var(--shadow);transition:transform .2s,box-shadow .2s;overflow:hidden}.book-card:hover{transform:translateY(-5px);box-shadow:0 18px 38px #123d2b18}.cover{height:205px;border-radius:14px;overflow:hidden;position:relative;background:#dce9d8}.cover img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .35s}.book-card:hover .cover img{transform:scale(1.04)}.cover-label{position:absolute;left:10px;top:10px;background:#ffffffeb;color:var(--forest);border-radius:999px;padding:5px 10px;font-size:.72rem;font-weight:800}.book-card h3{font:800 1.13rem Arial, Helvetica, sans-serif;margin:13px 3px 2px}.meta{color:var(--muted);font-size:.86rem;margin:0 3px 10px}.tag-row{display:flex;gap:6px;flex-wrap:wrap;margin:0 3px 13px}.tag{background:#eef5eb;color:#41644b;padding:4px 8px;border-radius:7px;font-size:.72rem;font-weight:700}.card-bottom{display:flex;align-items:center;justify-content:space-between;gap:8px;border-top:1px solid #edf1e9;padding:12px 3px 2px}.price{font-weight:800;color:var(--forest)}.small-btn{border:0;border-radius:999px;background:var(--lime);color:var(--forest);font-weight:800;padding:9px 13px}.empty{display:none;text-align:center;padding:30px;color:var(--muted)}.sell-strip{margin:30px auto 0;max-width:900px;background:white;border:1px solid var(--line);border-radius:20px;padding:20px 23px;display:flex;align-items:center;justify-content:space-between;gap:20px}.sell-strip h3{font:800 1.2rem Arial, Helvetica, sans-serif;margin:0}.sell-strip p{color:var(--muted);margin:3px 0 0;font-size:.9rem}
+    .steps{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;counter-reset:step}.step{position:relative;padding:10px 12px 10px 72px}.step:before{counter-increment:step;content:counter(step);position:absolute;left:0;top:7px;width:52px;height:52px;border-radius:17px;display:grid;place-items:center;background:var(--lime);font:800 1.35rem Arial, Helvetica, sans-serif}.step h3{font:800 1.2rem Arial, Helvetica, sans-serif;margin:0 0 7px}.step p{color:var(--muted);margin:0;font-size:.95rem}.cta{background:var(--forest);color:white;border-radius:30px;padding:48px;display:flex;justify-content:space-between;align-items:center;gap:25px}.cta h2{font:800 clamp(2rem,4vw,3rem)/1.1 Arial, Helvetica, sans-serif;max-width:620px;margin:0 0 10px}.cta p{color:#d3e4d6;margin:0}.cta .btn{flex-shrink:0}footer{padding:34px 0;color:#718176;font-size:.88rem}.footer-inner{display:flex;justify-content:space-between;align-items:center;gap:18px;flex-wrap:wrap}
+    .toast{position:fixed;bottom:22px;left:50%;transform:translate(-50%,20px);opacity:0;pointer-events:none;background:var(--forest);color:white;padding:12px 20px;border-radius:999px;box-shadow:var(--shadow);transition:.25s;z-index:50;text-align:center;max-width:calc(100% - 30px)}.toast.show{opacity:1;transform:translate(-50%,0)}
+    .modal-backdrop{position:fixed;inset:0;background:#10291dcc;display:none;align-items:center;justify-content:center;padding:18px;z-index:40}.modal-backdrop.open{display:flex}.modal{width:min(620px,100%);max-height:92vh;overflow:auto;background:white;border-radius:24px;padding:26px;box-shadow:0 25px 80px #0003}.modal-head{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:17px}.modal h2{font:800 1.7rem Arial, Helvetica, sans-serif;margin:0}.close{border:0;background:#eef4ec;border-radius:50%;width:38px;height:38px;font-size:1.3rem;color:var(--forest)}.form-grid{display:grid;grid-template-columns:1fr 1fr;gap:13px}.field{display:flex;flex-direction:column;gap:5px}.field.full{grid-column:1/-1}.field label{font-weight:700;font-size:.86rem}.field input,.field select,.field textarea{width:100%;border:1px solid var(--line);border-radius:12px;padding:11px 12px;outline-color:var(--green);background:white;color:var(--ink)}.field textarea{min-height:75px;resize:vertical}.form-actions{display:flex;justify-content:flex-end;gap:9px;margin-top:18px}.helper{color:var(--muted);font-size:.8rem;margin:10px 0 0}
+    @media(max-width:850px){.hero-grid{grid-template-columns:1fr;gap:20px}.hero{padding-top:54px}.navlinks{display:none;position:absolute;top:76px;left:0;right:0;padding:20px;background:var(--paper);flex-direction:column;align-items:stretch;border-bottom:1px solid var(--line)}.navlinks.open{display:flex}.menu{display:block}.nav-actions>.btn{display:none}.benefits,.books,.steps{grid-template-columns:repeat(2,1fr)}.cta{padding:35px;flex-direction:column;align-items:flex-start}}
+    @media(max-width:560px){.container{width:calc(100% - 28px)}.hero h1{letter-spacing:-2px}.section{padding:55px 0}.benefits,.books,.steps{grid-template-columns:1fr}.filters{grid-template-columns:1fr}.searchbar{border-radius:15px}.searchbar .btn{padding:10px 13px}.sell-strip{align-items:flex-start;flex-direction:column}.cta{padding:30px 24px}.form-grid{grid-template-columns:1fr}.field.full{grid-column:auto}.footer-inner{flex-direction:column;align-items:flex-start}}
+    @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*,*:before,*:after{transition:none!important}}
+  </style>
+</head>
+<body>
+  <div class="topbar">🌱 Libros que se reutilizan · Conocimiento que se comparte</div>
+  <header>
+    <div class="container nav">
+      <a class="logo" href="#inicio" aria-label="LibriSwap, inicio">Libri<span>Swap</span></a>
+      <nav class="navlinks" id="navlinks" aria-label="Navegación principal">
+        <a href="#explorar">Explorar libros</a><a href="#como-funciona">Cómo funciona</a><a href="#comunidad">Comunidad educativa</a>
+      </nav>
+      <div class="nav-actions"><a class="btn" href="#explorar">Encuentra tu libro ↗</a></div>
+      <button class="menu" id="menu" aria-label="Abrir menú" aria-expanded="false">☰</button>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero" id="inicio">
+      <div class="container hero-grid">
+        <div>
+          <span class="eyebrow">Compra · Vende · Intercambia</span>
+          <h1>Los libros<br>no terminan.<br><span>Empiezan otra vez.</span></h1>
+          <p>LibriSwap conecta a estudiantes de centros educativos para dar una segunda vida a libros de texto y lecturas. Ahorra, comparte y apuesta por una forma más sostenible de estudiar.</p>
+          <div class="hero-actions"><a class="btn dark" href="#explorar">Explorar catálogo →</a><button class="btn" id="heroPublish">Publicar un libro +</button></div>
+          <span class="hero-note">Un libro usado también puede abrir un mundo nuevo.</span>
+        </div>
+        
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="container">
+        <div class="section-head"><span class="eyebrow">Pequeños gestos, grandes cambios</span><h2>Compartir también es cuidar</h2><p>Cuando un libro pasa a otras manos, su historia continúa y los recursos se aprovechan durante más tiempo.</p></div>
+        <div class="benefits">
+          <article class="benefit"><div class="benefit-icon">€</div><h3>Estudia gastando menos</h3><p>Encuentra libros de cursos anteriores a precios más accesibles o consigue otro mediante intercambio.</p></article>
+          <article class="benefit"><div class="benefit-icon">🌿</div><h3>Reduce el desperdicio</h3><p>Reutilizar materiales escolares ayuda a alargar su vida útil y a consumir de forma más responsable.</p></article>
+          <article class="benefit"><div class="benefit-icon">🏫</div><h3>Una comunidad conectada</h3><p>Facilita que estudiantes de un mismo centro o de centros cercanos compartan recursos.</p></article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section market" id="explorar">
+      <div class="container">
+        <div class="section-head"><span class="eyebrow">Tu próximo libro está aquí</span><h2>Explora el catálogo</h2><p>Filtra por etapa, curso o asignatura y encuentra materiales para seguir aprendiendo.</p></div>
+        <div class="catalog-tools">
+          <div class="searchbar"><input id="search" type="search" placeholder="Buscar por título, materia o editorial..." aria-label="Buscar libros"><button class="btn dark" id="clearSearch" type="button">Limpiar</button></div>
+          <div class="filters">
+            <select id="courseFilter" aria-label="Filtrar por curso"><option value="">Todos los cursos</option><option>1.º ESO</option><option>2.º ESO</option><option>3.º ESO</option><option>4.º ESO</option><option>1.º Bach</option><option>2.º Bach</option></select>
+            <select id="subjectFilter" aria-label="Filtrar por asignatura"><option value="">Todas las asignaturas</option><option>Matemáticas</option><option>Lengua</option><option>Biología</option><option>Física y Química</option><option>Historia</option><option>Inglés</option></select>
+            <select id="typeFilter" aria-label="Filtrar por modalidad"><option value="">Compra o intercambio</option><option value="Venta">En venta</option><option value="Intercambio">Intercambio</option></select>
+          </div>
+        </div>
+        <div class="chips" aria-label="Filtrar catálogo por categoría">
+          <button class="chip active" data-filter="todos">Todos</button><button class="chip" data-filter="texto">Libros de texto</button><button class="chip" data-filter="lectura">Lecturas</button>
+        </div>
+        <div class="results-line"><span id="resultCount" aria-live="polite">Mostrando libros de ejemplo</span><span>📗 Catálogo de demostración</span></div>
+        <div class="books" id="books">
+          <article class="book-card" data-category="texto" data-course="1.º ESO" data-subject="Matemáticas" data-type="Venta" data-search="matemáticas 1 eso savia sm números álgebra">
+            <div class="cover"><img src="data:image/svg+xml;charset=UTF-8,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20width%3D%22700%22%20height%3D%22440%22%20viewBox%3D%220%200%20700%20440%22%3E%0A%20%20%20%20%3Crect%20width%3D%22700%22%20height%3D%22440%22%20rx%3D%2228%22%20fill%3D%22%23d8edb9%22/%3E%0A%20%20%20%20%3Cpath%20d%3D%22M0%20330%20Q180%20260%20350%20340%20T700%20315%20V440%20H0Z%22%20fill%3D%22%2324513b%22%20opacity%3D%22.10%22/%3E%0A%20%20%20%20%3Crect%20x%3D%22184%22%20y%3D%2238%22%20width%3D%22330%22%20height%3D%22365%22%20rx%3D%2216%22%20fill%3D%22%2324513b%22%20opacity%3D%22.16%22/%3E%0A%20%20%20%20%3Crect%20x%3D%22166%22%20y%3D%2228%22%20width%3D%22330%22%20height%3D%22365%22%20rx%3D%2216%22%20fill%3D%22%23fff%22%20opacity%3D%22.88%22/%3E%0A%20%20%20%20%3Crect%20x%3D%22166%22%20y%3D%2228%22%20width%3D%2226%22%20height%3D%22365%22%20rx%3D%2210%22%20fill%3D%22%2324513b%22/%3E%0A%20%20%20%20%3Crect%20x%3D%22212%22%20y%3D%2275%22%20width%3D%22238%22%20height%3D%227%22%20rx%3D%224%22%20fill%3D%22%2324513b%22%20opacity%3D%22.25%22/%3E%0A%20%20%20%20%3Ctext%20x%3D%22220%22%20y%3D%22164%22%20font-family%3D%22Arial%2Csans-serif%22%20font-size%3D%2237%22%20font-weight%3D%22700%22%20fill%3D%22%2324513b%22%3EMatem%C3%A1ticas%3C/text%3E%0A%20%20%20%20%3Ctext%20x%3D%22220%22%20y%3D%22213%22%20font-family%3D%22Arial%2Csans-serif%22%20font-size%3D%2217%22%20letter-spacing%3D%222%22%20fill%3D%22%2324513b%22%3EN%C3%9AMEROS%20%C2%B7%20%C3%81LGEBRA%3C/text%3E%0A%20%20%20%20%3Ccircle%20cx%3D%22420%22%20cy%3D%22310%22%20r%3D%2242%22%20fill%3D%22%2324513b%22%20opacity%3D%22.12%22/%3E%0A%20%20%20%20%3Cpath%20d%3D%22M400%20310%20l15%2015%2030%20-36%22%20fill%3D%22none%22%20stroke%3D%22%2324513b%22%20stroke-width%3D%229%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22/%3E%0A%20%20%20%20%3Ctext%20x%3D%22220%22%20y%3D%22355%22%20font-family%3D%22Arial%2Csans-serif%22%20font-size%3D%2217%22%20font-weight%3D%22700%22%20fill%3D%22%2324513b%22%20opacity%3D%22.7%22%3ELIBRISWAP%20%C2%B7%20SEGUNDA%20VIDA%3C/text%3E%0A%20%20%20%20%3C/svg%3E" alt="Portada ilustrada de Matemáticas"><span class="cover-label">1.º ESO</span></div>
+            <h3>Matemáticas — 1.º ESO</h3><p class="meta">Libro de texto · Buen estado</p><div class="tag-row"><span class="tag">Matemáticas</span><span class="tag">ESO</span></div><div class="card-bottom"><span class="price">12 €</span><button class="small-btn contact" data-book="Matemáticas — 1.º ESO">Me interesa</button></div>
+          </article>
+          <article class="book-card" data-category="texto" data-course="2.º ESO" data-subject="Lengua" data-type="Intercambio" data-search="lengua castellana literatura 2 eso libro texto">
+            <div class="cover"><img src="data:image/svg+xml;charset=UTF-8,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20width%3D%22700%22%20height%3D%22440%22%20viewBox%3D%220%200%20700%20440%22%3E%0A%20%20%20%20%3Crect%20width%3D%22700%22%20height%3D%22440%22%20rx%3D%2228%22%20fill%3D%22%23cce4f2%22/%3E%0A%20%20%20%20%3Cpath%20d%3D%22M0%20330%20Q180%20260%20350%20340%20T700%20315%20V440%20H0Z%22%20fill%3D%22%23214d67%22%20opacity%3D%22.10%22/%3E%0A%20%20%20%20%3Crect%20x%3D%22184%22%20y%3D%2238%22%20width%3D%22330%22%20height%3D%22365%22%20rx%3D%2216%22%20fill%3D%22%23214d67%22%20opacity%3D%22.16%22/%3E%0A%20%20%20%20%3Crect%20x%3D%22166%22%20y%3D%2228%22%20width%3D%22330%22%20height%3D%22365%22%20rx%3D%2216%22%20fill%3D%22%23fff%22%20opacity%3D%22.88%22/%3E%0A%20%20%20%20%3Crect%20x%3D%22166%22%20y%3D%2228%22%20width%3D%2226%22%20height%3D%22365%22%20rx%3D%2210%22%20fill%3D%22%23214d67%22/%3E%0A%20%20%20%20%3Crect%20x%3D%22212%22%20y%3D%2275%22%20width%3D%22238%22%20height%3D%227%22%20rx%3D%224%22%20fill%3D%22%23214d67%22%20opacity%3D%22.25%22/%3E%0A%20%20%20%20%3Ctext%20x%3D%22220%22%20y%3D%22164%22%20font-family%3D%22Arial%2Csans-serif%22%20font-size%3D%2237%22%20font-weight%3D%22700%22%20fill%3D%22%23214d67%22%3ELengua%3C/text%3E%0A%20%20%20%20%3Ctext%20x%3D%22220%22%20y%3D%22213%22%20font-family%3D%22Arial%2Csans-serif%22%20font-size%3D%2217%22%20letter-spacing%3D%222%22%20fill%3D%22%23214d67%22%3ELENGUA%20Y%20LITERATURA%3C/text%3E%0A%20%20%20%20%3Ccircle%20cx%3D%22420%22%20cy%3D%22310%22%20r%3D%2242%22%20fill%3D%22%23214d67%22%20opacity%3D%22.12%22/%3E%0A%20%20%20%20%3Cpath%20d%3D%22M400%20310%20l15%2015%2030%20-36%22%20fill%3D%22none%22%20stroke%3D%22%23214d67%22%20stroke-width%3D%229%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22/%3E%0A%20%20%20%20%3Ctext%20x%3D%22220%22%20y%3D%22355%22%20font-family%3D%22Arial%2Csans-serif%22%20font-size%3D%2217%22%20font-weight%3D%22700%22%20fill%3D%22%23214d67%22%20opacity%3D%22.7%22%3ELIBRISWAP%20%C2%B7%20SEGUNDA%20VIDA%3C/text%3E%0A%20%20%20%20%3C/svg%3E" alt="Portada ilustrada de Lengua"><span class="cover-label">2.º ESO</span></div>
+            <h3>Lengua Castellana — 2.º ESO</h3><p class="meta">Libro de texto · Muy buen estado</p><div class="tag-row"><span class="tag">Lengua</span><span class="tag">ESO</span></div><div class="card-bottom"><span class="price">Intercambio</span><button class="small-btn contact" data-book="Lengua Castellana — 2.º ESO">Me interesa</button></div>
+          </article>
+          <article class="book-card" data-category="texto" data-course="3.º ESO" data-subject="Biología" data-type="Venta" data-search="biología geología 3 eso ciencias">
+            <div class="cover"><img src="data:image/svg+xml;charset=UTF-8,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20width%3D%22700%22%20height%3D%22440%22%20viewBox%3D%220%200%20700%20440%22%3E%0A%20%20%20%20%3Crect%20width%3D%22700%22%20height%3D%22440%22%20rx%3D%2228%22%20fill%3D%22%23d6e9d0%22/%3E%0A%20%20%20%20%3Cpath%20d%3D%22M0%20330%20Q180%20260%20350%20340%20T700%20315%20V440%20H0Z%22%20fill%3D%22%23315b3c%22%20opacity%3D%22.10%22/%3E%0A%20%20%20%20%3Crect%20x%3D%22184%22%20y%3D%2238%22%20width%3D%22330%22%20height%3D%22365%22%20rx%3D%2216%22%20fill%3D%22%23315b3c%22%20opacity%3D%22.16%22/%3E%0A%20%20%20%20%3Crect%20x%3D%22166%22%20y%3D%2228%22%20width%3D%22330%22%20height%3D%22365%22%20rx%3D%2216%22%20fill%3D%22%23fff%22%20opacity%3D%22.88%22/%3E%0A%20%20%20%20%3Crect%20x%3D%22166%22%20y%3D%2228%22%20width%3D%2226%22%20height%3D%22365%22%20rx%3D%2210%22%20fill%3D%22%23315b3c%22/%3E%0A%20%20%20%20%3Crect%20x%3D%22212%22%20y%3D%2275%22%20width%3D%22238%22%20height%3D%227%22%20rx%3D%224%22%20fill%3D%22%23315b3c%22%20opacity%3D%22.25%22/%3E%0A%20%20%20%20%3Ctext%20x%3D%22220%22%20y%3D%22164%22%20font-family%3D%22Arial%2Csans-serif%22%20font-size%3D%2237%22%20font-weight%3D%22700%22%20fill%3D%22%23315b3c%22%3EBiolog%C3%ADa%3C/text%3E%0A%20%20%20%20%3Ctext%20x%3D%22220%22%20y%3D%22213%22%20font-family%3D%22Arial%2Csans-serif%22%20font-size%3D%2217%22%20letter-spacing%3D%222%22%20fill%3D%22%23315b3c%22%3EBIOLOG%C3%8DA%20%C2%B7%20GEOLOG%C3%8DA%3C/text%3E%0A%20%20%20%20%3Ccircle%20cx%3D%22420%22%20cy%3D%22310%22%20r%3D%2242%22%20fill%3D%22%23315b3c%22%20opacity%3D%22.12%22/%3E%0A%20%20%20%20%3Cpath%20d%3D%22M400%20310%20l15%2015%2030%20-36%22%20fill%3D%22none%22%20stroke%3D%22%23315b3c%22%20stroke-width%3D%229%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22/%3E%0A%20%20%20%20%3Ctext%20x%3D%22220%22%20y%3D%22355%22%20font-family%3D%22Arial%2Csans-serif%22%20font-size%3D%2217%22%20font-weight%3D%22700%22%20fill%3D%22%23315b3c%22%20opacity%3D%22.7%22%3ELIBRISWAP%20%C2%B7%20SEGUNDA%20VIDA%3C/text%3E%0A%20%20%20%20%3C/svg%3E" alt="Portada ilustrada de Biología"><span class="cover-label">3.º ESO</span></div>
+            <h3>Biología y Geología — 3.º ESO</h3><p class="meta">Libro de texto · Buen estado</p><div class="tag-row"><span class="tag">Biología</span><span class="tag">ESO</span></div><div class="card-bottom"><span class="price">10 €</span><button class="small-btn contact" data-book="Biología y Geología — 3.º ESO">Me interesa</button></div>
+          </article>
+          <article class="book-card" data-category="texto" data-course="4.º ESO" data-subject="Física y Química" data-type="Intercambio" data-search="física química 4 eso ciencias">
+            <div class="cover"><img src="data:image/svg+xml;charset=UTF-8,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20width%3D%22700%22%20height%3D%22440%22%20viewBox%3D%220%200%20700%20440%22%3E%0A%20%20%20%20%3Crect%20width%3D%22700%22%20height%3D%22440%22%20rx%3D%2228%22%20fill%3D%22%23f4d7ad%22/%3E%0A%20%20%20%20%3Cpath%20d%3D%22M0%20330%20Q180%20260%20350%20340%20T700%20315%20V440%20H0Z%22%20fill%3D%22%23694b2d%22%20opacity%3D%22.10%22/%3E%0A%20%20%20%20%3Crect%20x%3D%22184%22%20y%3D%2238%22%20width%3D%22330%22%20height%3D%22365%22%20rx%3D%2216%22%20fill%3D%22%23694b2d%22%20opacity%3D%22.16%22/%3E%0A%20%20%20%20%3Crect%20x%3D%22166%22%20y%3D%2228%22%20width%3D%22330%22%20height%3D%22365%22%20rx%3D%2216%22%20fill%3D%22%23fff%22%20opacity%3D%22.88%22/%3E%0A%20%20%20%20%3Crect%20x%3D%22166%22%20y%3D%2228%22%20width%3D%2226%22%20height%3D%22365%22%20rx%3D%2210%22%20fill%3D%22%23694b2d%22/%3E%0A%20%20%20%20%3Crect%20x%3D%22212%22%20y%3D%2275%22%20width%3D%22238%22%20height%3D%227%22%20rx%3D%224%22%20fill%3D%22%23694b2d%22%20opacity%3D%22.25%22/%3E%0A%20%20%20%20%3Ctext%20x%3D%22220%22%20y%3D%22164%22%20font-family%3D%22Arial%2Csans-serif%22%20font-size%3D%2237%22%20font-weight%3D%22700%22%20fill%3D%22%23694b2d%22%3EF%C3%ADsica%3C/text%3E%0A%20%20%20%20%3Ctext%20x%3D%22220%22%20y%3D%22213%22%20font-family%3D%22Arial%2Csans-serif%22%20font-size%3D%2217%22%20letter-spacing%3D%222%22%20fill%3D%22%23694b2d%22%3EF%C3%8DSICA%20%C2%B7%20QU%C3%8DMICA%3C/text%3E%0A%20%20%20%20%3Ccircle%20cx%3D%22420%22%20cy%3D%22310%22%20r%3D%2242%22%20fill%3D%22%23694b2d%22%20opacity%3D%22.12%22/%3E%0A%20%20%20%20%3Cpath%20d%3D%22M400%20310%20l15%2015%2030%20-36%22%20fill%3D%22none%22%20stroke%3D%22%23694b2d%22%20stroke-width%3D%229%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22/%3E%0A%20%20%20%20%3Ctext%20x%3D%22220%22%20y%3D%22355%22%20font-family%3D%22Arial%2Csans-serif%22%20font-size%3D%2217%22%20font-weight%3D%22700%22%20fill%3D%22%23694b2d%22%20opacity%3D%22.7%22%3ELIBRISWAP%20%C2%B7%20SEGUNDA%20VIDA%3C/text%3E%0A%20%20%20%20%3C/svg%3E" alt="Portada ilustrada de Física"><span class="cover-label">4.º ESO</span></div>
+            <h3>Física y Química — 4.º ESO</h3><p class="meta">Libro de texto · Buen estado</p><div class="tag-row"><span class="tag">Física y Química</span><span class="tag">ESO</span></div><div class="card-bottom"><span class="price">Intercambio</span><button class="small-btn contact" data-book="Física y Química — 4.º ESO">Me interesa</button></div>
+          </article>
+          <article class="book-card" data-category="texto" data-course="1.º Bach" data-subject="Historia" data-type="Venta" data-search="historia mundo contemporáneo 1 bachillerato">
+            <div class="cover"><img src="data:image/svg+xml;charset=UTF-8,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20width%3D%22700%22%20height%3D%22440%22%20viewBox%3D%220%200%20700%20440%22%3E%0A%20%20%20%20%3Crect%20width%3D%22700%22%20height%3D%22440%22%20rx%3D%2228%22%20fill%3D%22%23e9d8c6%22/%3E%0A%20%20%20%20%3Cpath%20d%3D%22M0%20330%20Q180%20260%20350%20340%20T700%20315%20V440%20H0Z%22%20fill%3D%22%23654638%22%20opacity%3D%22.10%22/%3E%0A%20%20%20%20%3Crect%20x%3D%22184%22%20y%3D%2238%22%20width%3D%22330%22%20height%3D%22365%22%20rx%3D%2216%22%20fill%3D%22%23654638%22%20opacity%3D%22.16%22/%3E%0A%20%20%20%20%3Crect%20x%3D%22166%22%20y%3D%2228%22%20width%3D%22330%22%20height%3D%22365%22%20rx%3D%2216%22%20fill%3D%22%23fff%22%20opacity%3D%22.88%22/%3E%0A%20%20%20%20%3Crect%20x%3D%22166%22%20y%3D%2228%22%20width%3D%2226%22%20height%3D%22365%22%20rx%3D%2210%22%20fill%3D%22%23654638%22/%3E%0A%20%20%20%20%3Crect%20x%3D%22212%22%20y%3D%2275%22%20width%3D%22238%22%20height%3D%227%22%20rx%3D%224%22%20fill%3D%22%23654638%22%20opacity%3D%22.25%22/%3E%0A%20%20%20%20%3Ctext%20x%3D%22220%22%20y%3D%22164%22%20font-family%3D%22Arial%2Csans-serif%22%20font-size%3D%2237%22%20font-weight%3D%22700%22%20fill%3D%22%23654638%22%3EHistoria%3C/text%3E%0A%20%20%20%20%3Ctext%20x%3D%22220%22%20y%3D%22213%22%20font-family%3D%22Arial%2Csans-serif%22%20font-size%3D%2217%22%20letter-spacing%3D%222%22%20fill%3D%22%23654638%22%3EHISTORIA%3C/text%3E%0A%20%20%20%20%3Ccircle%20cx%3D%22420%22%20cy%3D%22310%22%20r%3D%2242%22%20fill%3D%22%23654638%22%20opacity%3D%22.12%22/%3E%0A%20%20%20%20%3Cpath%20d%3D%22M400%20310%20l15%2015%2030%20-36%22%20fill%3D%22none%22%20stroke%3D%22%23654638%22%20stroke-width%3D%229%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22/%3E%0A%20%20%20%20%3Ctext%20x%3D%22220%22%20y%3D%22355%22%20font-family%3D%22Arial%2Csans-serif%22%20font-size%3D%2217%22%20font-weight%3D%22700%22%20fill%3D%22%23654638%22%20opacity%3D%22.7%22%3ELIBRISWAP%20%C2%B7%20SEGUNDA%20VIDA%3C/text%3E%0A%20%20%20%20%3C/svg%3E" alt="Portada ilustrada de Historia"><span class="cover-label">1.º Bach</span></div>
+            <h3>Historia del Mundo Contemporáneo</h3><p class="meta">Libro de texto · Muy buen estado</p><div class="tag-row"><span class="tag">Historia</span><span class="tag">Bachillerato</span></div><div class="card-bottom"><span class="price">15 €</span><button class="small-btn contact" data-book="Historia del Mundo Contemporáneo">Me interesa</button></div>
+          </article>
+          <article class="book-card" data-category="texto" data-course="2.º Bach" data-subject="Matemáticas" data-type="Venta" data-search="matemáticas ii 2 bachillerato evau">
+            <div class="cover"><img src="data:image/svg+xml;charset=UTF-8,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20width%3D%22700%22%20height%3D%22440%22%20viewBox%3D%220%200%20700%20440%22%3E%0A%20%20%20%20%3Crect%20width%3D%22700%22%20height%3D%22440%22%20rx%3D%2228%22%20fill%3D%22%23d7d8f1%22/%3E%0A%20%20%20%20%3Cpath%20d%3D%22M0%20330%20Q180%20260%20350%20340%20T700%20315%20V440%20H0Z%22%20fill%3D%22%23393c70%22%20opacity%3D%22.10%22/%3E%0A%20%20%20%20%3Crect%20x%3D%22184%22%20y%3D%2238%22%20width%3D%22330%22%20height%3D%22365%22%20rx%3D%2216%22%20fill%3D%22%23393c70%22%20opacity%3D%22.16%22/%3E%0A%20%20%20%20%3Crect%20x%3D%22166%22%20y%3D%2228%22%20width%3D%22330%22%20height%3D%22365%22%20rx%3D%2216%22%20fill%3D%22%23fff%22%20opacity%3D%22.88%22/%3E%0A%20%20%20%20%3Crect%20x%3D%22166%22%20y%3D%2228%22%20width%3D%2226%22%20height%3D%22365%22%20rx%3D%2210%22%20fill%3D%22%23393c70%22/%3E%0A%20%20%20%20%3Crect%20x%3D%22212%22%20y%3D%2275%22%20width%3D%22238%22%20height%3D%227%22%20rx%3D%224%22%20fill%3D%22%23393c70%22%20opacity%3D%22.25%22/%3E%0A%20%20%20%20%3Ctext%20x%3D%22220%22%20y%3D%22164%22%20font-family%3D%22Arial%2Csans-serif%22%20font-size%3D%2237%22%20font-weight%3D%22700%22%20fill%3D%22%23393c70%22%3EMatem%C3%A1ticas%20II%3C/text%3E%0A%20%20%20%20%3Ctext%20x%3D%22220%22%20y%3D%22213%22%20font-family%3D%22Arial%2Csans-serif%22%20font-size%3D%2217%22%20letter-spacing%3D%222%22%20fill%3D%22%23393c70%22%3ECIENCIAS%20%C2%B7%20BACHILLERATO%3C/text%3E%0A%20%20%20%20%3Ccircle%20cx%3D%22420%22%20cy%3D%22310%22%20r%3D%2242%22%20fill%3D%22%23393c70%22%20opacity%3D%22.12%22/%3E%0A%20%20%20%20%3Cpath%20d%3D%22M400%20310%20l15%2015%2030%20-36%22%20fill%3D%22none%22%20stroke%3D%22%23393c70%22%20stroke-width%3D%229%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22/%3E%0A%20%20%20%20%3Ctext%20x%3D%22220%22%20y%3D%22355%22%20font-family%3D%22Arial%2Csans-serif%22%20font-size%3D%2217%22%20font-weight%3D%22700%22%20fill%3D%22%23393c70%22%20opacity%3D%22.7%22%3ELIBRISWAP%20%C2%B7%20SEGUNDA%20VIDA%3C/text%3E%0A%20%20%20%20%3C/svg%3E" alt="Portada ilustrada de Matemáticas II"><span class="cover-label">2.º Bach</span></div>
+            <h3>Matemáticas II — 2.º Bach</h3><p class="meta">Libro de texto · Buen estado</p><div class="tag-row"><span class="tag">Matemáticas</span><span class="tag">Bachillerato</span></div><div class="card-bottom"><span class="price">18 €</span><button class="small-btn contact" data-book="Matemáticas II — 2.º Bach">Me interesa</button></div>
+          </article>
+          <article class="book-card" data-category="lectura" data-course="3.º ESO" data-subject="Lengua" data-type="Intercambio" data-search="el principito lectura novela lengua">
+            <div class="cover"><img src="data:image/svg+xml;charset=UTF-8,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20width%3D%22700%22%20height%3D%22440%22%20viewBox%3D%220%200%20700%20440%22%3E%0A%20%20%20%20%3Crect%20width%3D%22700%22%20height%3D%22440%22%20rx%3D%2228%22%20fill%3D%22%23f1d3df%22/%3E%0A%20%20%20%20%3Cpath%20d%3D%22M0%20330%20Q180%20260%20350%20340%20T700%20315%20V440%20H0Z%22%20fill%3D%22%23713d55%22%20opacity%3D%22.10%22/%3E%0A%20%20%20%20%3Crect%20x%3D%22184%22%20y%3D%2238%22%20width%3D%22330%22%20height%3D%22365%22%20rx%3D%2216%22%20fill%3D%22%23713d55%22%20opacity%3D%22.16%22/%3E%0A%20%20%20%20%3Crect%20x%3D%22166%22%20y%3D%2228%22%20width%3D%22330%22%20height%3D%22365%22%20rx%3D%2216%22%20fill%3D%22%23fff%22%20opacity%3D%22.88%22/%3E%0A%20%20%20%20%3Crect%20x%3D%22166%22%20y%3D%2228%22%20width%3D%2226%22%20height%3D%22365%22%20rx%3D%2210%22%20fill%3D%22%23713d55%22/%3E%0A%20%20%20%20%3Crect%20x%3D%22212%22%20y%3D%2275%22%20width%3D%22238%22%20height%3D%227%22%20rx%3D%224%22%20fill%3D%22%23713d55%22%20opacity%3D%22.25%22/%3E%0A%20%20%20%20%3Ctext%20x%3D%22220%22%20y%3D%22164%22%20font-family%3D%22Arial%2Csans-serif%22%20font-size%3D%2237%22%20font-weight%3D%22700%22%20fill%3D%22%23713d55%22%3ELecturas%3C/text%3E%0A%20%20%20%20%3Ctext%20x%3D%22220%22%20y%3D%22213%22%20font-family%3D%22Arial%2Csans-serif%22%20font-size%3D%2217%22%20letter-spacing%3D%222%22%20fill%3D%22%23713d55%22%3ELECTURA%20JUVENIL%3C/text%3E%0A%20%20%20%20%3Ccircle%20cx%3D%22420%22%20cy%3D%22310%22%20r%3D%2242%22%20fill%3D%22%23713d55%22%20opacity%3D%22.12%22/%3E%0A%20%20%20%20%3Cpath%20d%3D%22M400%20310%20l15%2015%2030%20-36%22%20fill%3D%22none%22%20stroke%3D%22%23713d55%22%20stroke-width%3D%229%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22/%3E%0A%20%20%20%20%3Ctext%20x%3D%22220%22%20y%3D%22355%22%20font-family%3D%22Arial%2Csans-serif%22%20font-size%3D%2217%22%20font-weight%3D%22700%22%20fill%3D%22%23713d55%22%20opacity%3D%22.7%22%3ELIBRISWAP%20%C2%B7%20SEGUNDA%20VIDA%3C/text%3E%0A%20%20%20%20%3C/svg%3E" alt="Portada ilustrada de Lecturas"><span class="cover-label">3.º ESO</span></div>
+            <h3>Lectura: novela juvenil</h3><p class="meta">Lectura obligatoria · Buen estado</p><div class="tag-row"><span class="tag">Lectura</span><span class="tag">Lengua</span></div><div class="card-bottom"><span class="price">Intercambio</span><button class="small-btn contact" data-book="Lectura: novela juvenil">Me interesa</button></div>
+          </article>
+        </div>
+        <p class="empty" id="empty">No hay libros que coincidan con esos filtros. Prueba a cambiar la búsqueda.</p>
+        <div class="sell-strip"><div><h3>¿Tienes libros que ya no utilizas?</h3><p>Publícalos en unos pasos y deja que otro estudiante les saque partido.</p></div><button class="btn dark" id="publishBtn">Publicar mi libro +</button></div>
+      </div>
+    </section>
+
+    <section class="section" id="como-funciona"><div class="container">
+      <div class="section-head"><span class="eyebrow">Así de fácil</span><h2>Una nueva vida en tres pasos</h2><p>Reutilizar tus libros es sencillo: solo necesitas encontrar a la persona adecuada.</p></div>
+      <div class="steps"><article class="step"><h3>Publica tu libro</h3><p>Añade sus datos, el curso, la asignatura y elige si quieres venderlo o intercambiarlo.</p></article><article class="step"><h3>Encuentra lo que necesitas</h3><p>Filtra el catálogo para localizar libros y materiales de tu etapa educativa.</p></article><article class="step"><h3>Acuerda la entrega</h3><p>Contactad a través de los canales del centro y acordad una entrega segura.</p></article></div>
+    </div></section>
+
+    <section class="section" id="comunidad"><div class="container"><div class="cta"><div><h2>El conocimiento crece cuando se comparte.</h2><p>Una comunidad educativa más sostenible empieza con un libro.</p></div><a class="btn" href="#explorar">Únete a LibriSwap ↗</a></div></div></section>
+  </main>
+  <footer><div class="container footer-inner"><a class="logo" href="#inicio">Libri<span>Swap</span></a><span>Comparte tu conocimiento · Dale más vidas a los libros 🌱</span><span>© <span id="year"></span> LibriSwap</span></div></footer>
+
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+  <div class="modal-backdrop" id="publishModal" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+    <div class="modal">
+      <div class="modal-head"><h2 id="modalTitle">Publica tu libro</h2><button class="close" id="closeModal" aria-label="Cerrar">×</button></div>
+      <form id="publishForm">
+        <div class="form-grid">
+          <div class="field full"><label for="bookTitle">Título del libro *</label><input id="bookTitle" name="title" required placeholder="Ej. Biología y Geología"></div>
+          <div class="field"><label for="bookCourse">Curso *</label><select id="bookCourse" required><option value="">Selecciona</option><option>1.º ESO</option><option>2.º ESO</option><option>3.º ESO</option><option>4.º ESO</option><option>1.º Bach</option><option>2.º Bach</option></select></div>
+          <div class="field"><label for="bookSubject">Asignatura *</label><select id="bookSubject" required><option value="">Selecciona</option><option>Matemáticas</option><option>Lengua</option><option>Biología</option><option>Física y Química</option><option>Historia</option><option>Inglés</option><option>Otra</option></select></div>
+          <div class="field"><label for="bookCondition">Estado</label><select id="bookCondition"><option>Buen estado</option><option>Muy buen estado</option><option>Como nuevo</option><option>Con marcas de uso</option></select></div>
+          <div class="field"><label for="bookType">¿Qué quieres hacer?</label><select id="bookType"><option>Venta</option><option>Intercambio</option></select></div>
+          <div class="field"><label for="bookPrice">Precio (€)</label><input id="bookPrice" type="number" min="0" step="0.5" placeholder="Ej. 10"></div>
+          <div class="field"><label for="bookImage">Foto (URL opcional)</label><input id="bookImage" type="url" placeholder="https://..."></div>
+          <div class="field full"><label for="bookNotes">Detalles adicionales</label><textarea id="bookNotes" placeholder="Editorial, edición, anotaciones..."></textarea></div>
+        </div>
+        <p class="helper">Esta es una demostración: los anuncios se añaden solo a esta página mientras esté abierta.</p>
+        <div class="form-actions"><button type="button" class="btn light" id="cancelModal">Cancelar</button><button type="submit" class="btn dark">Añadir al catálogo</button></div>
+      </form>
+    </div>
+  </div>
+
+  <script>
+    const search = document.getElementById('search');
+    const cardsWrap = document.getElementById('books');
+    const chips = [...document.querySelectorAll('.chip')];
+    const course = document.getElementById('courseFilter');
+    const subject = document.getElementById('subjectFilter');
+    const type = document.getElementById('typeFilter');
+    const toast = document.getElementById('toast');
+    let activeCategory = 'todos';
+    let toastTimer;
+
+    function showToast(message){
+      toast.textContent = message;
+      toast.classList.add('show');
+      clearTimeout(toastTimer);
+      toastTimer = setTimeout(()=>toast.classList.remove('show'),3200);
+    }
+    function normalize(value){return (value||'').toLocaleLowerCase('es').normalize('NFD').replace(/[\u0300-\u036f]/g,'');}
+    function filterBooks(){
+      const term=normalize(search.value.trim());
+      let visible=0;
+      [...cardsWrap.querySelectorAll('.book-card')].forEach(card=>{
+        const text=normalize(card.dataset.search+' '+card.innerText);
+        const matchesText=text.includes(term);
+        const matchesCourse=!course.value||card.dataset.course===course.value;
+        const matchesSubject=!subject.value||card.dataset.subject===subject.value;
+        const matchesType=!type.value||card.dataset.type===type.value;
+        const matchesCategory=activeCategory==='todos'||card.dataset.category===activeCategory;
+        const show=matchesText&&matchesCourse&&matchesSubject&&matchesType&&matchesCategory;
+        card.hidden=!show;
+        if(show)visible++;
+      });
+      document.getElementById('empty').style.display=visible?'none':'block';
+      document.getElementById('resultCount').textContent=`${visible} ${visible===1?'libro encontrado':'libros encontrados'}`;
+    }
+    [search,course,subject,type].forEach(el=>el.addEventListener(el===search?'input':'change',filterBooks));
+    document.getElementById('clearSearch').addEventListener('click',()=>{
+      search.value='';course.value='';subject.value='';type.value='';
+      activeCategory='todos';chips.forEach(c=>c.classList.toggle('active',c.dataset.filter==='todos'));filterBooks();
+    });
+    chips.forEach(chip=>chip.addEventListener('click',()=>{
+      activeCategory=chip.dataset.filter;
+      chips.forEach(item=>item.classList.toggle('active',item===chip));
+      filterBooks();
+    }));
+    search.addEventListener('keydown',e=>{if(e.key==='Enter')filterBooks();});
+
+    const modal=document.getElementById('publishModal');
+    function openModal(){modal.classList.add('open');document.getElementById('bookTitle').focus();}
+    function closeModal(){modal.classList.remove('open');}
+    ['publishBtn','heroPublish'].forEach(id=>document.getElementById(id).addEventListener('click',openModal));
+    document.getElementById('closeModal').addEventListener('click',closeModal);
+    document.getElementById('cancelModal').addEventListener('click',closeModal);
+    modal.addEventListener('click',e=>{if(e.target===modal)closeModal();});
+    document.addEventListener('keydown',e=>{if(e.key==='Escape')closeModal();});
+
+    function attachContact(button){
+      button.addEventListener('click',()=>{
+        const book=button.dataset.book||'este libro';
+        showToast(`¡Te interesa "${book}"! En la web real, aquí se conectaría con su anunciante.`);
+      });
+    }
+    document.querySelectorAll('.contact').forEach(attachContact);
+
+    document.getElementById('publishForm').addEventListener('submit',e=>{
+      e.preventDefault();
+      const title=document.getElementById('bookTitle').value.trim();
+      const courseValue=document.getElementById('bookCourse').value;
+      const subjectValue=document.getElementById('bookSubject').value;
+      const condition=document.getElementById('bookCondition').value;
+      const typeValue=document.getElementById('bookType').value;
+      const price=document.getElementById('bookPrice').value.trim();
+      const imageUrl=document.getElementById('bookImage').value.trim();
+      const notes=document.getElementById('bookNotes').value.trim();
+      const category='texto';
+      const card=document.createElement('article');
+      card.className='book-card';
+      card.dataset.category=category;card.dataset.course=courseValue;card.dataset.subject=subjectValue;card.dataset.type=typeValue;
+      card.dataset.search=normalize(`${title} ${courseValue} ${subjectValue} ${notes}`);
+      const cover=document.createElement('div');cover.className='cover';
+      const img=document.createElement('img');img.loading='lazy';img.alt=`Fotografía de ${title}`;
+      img.src=imageUrl||'data:image/svg+xml;charset=UTF-8,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20width%3D%22700%22%20height%3D%22440%22%20viewBox%3D%220%200%20700%20440%22%3E%0A%20%20%20%20%3Crect%20width%3D%22700%22%20height%3D%22440%22%20rx%3D%2228%22%20fill%3D%22%23dcebd7%22/%3E%0A%20%20%20%20%3Cpath%20d%3D%22M0%20330%20Q180%20260%20350%20340%20T700%20315%20V440%20H0Z%22%20fill%3D%22%2328533a%22%20opacity%3D%22.10%22/%3E%0A%20%20%20%20%3Crect%20x%3D%22184%22%20y%3D%2238%22%20width%3D%22330%22%20height%3D%22365%22%20rx%3D%2216%22%20fill%3D%22%2328533a%22%20opacity%3D%22.16%22/%3E%0A%20%20%20%20%3Crect%20x%3D%22166%22%20y%3D%2228%22%20width%3D%22330%22%20height%3D%22365%22%20rx%3D%2216%22%20fill%3D%22%23fff%22%20opacity%3D%22.88%22/%3E%0A%20%20%20%20%3Crect%20x%3D%22166%22%20y%3D%2228%22%20width%3D%2226%22%20height%3D%22365%22%20rx%3D%2210%22%20fill%3D%22%2328533a%22/%3E%0A%20%20%20%20%3Crect%20x%3D%22212%22%20y%3D%2275%22%20width%3D%22238%22%20height%3D%227%22%20rx%3D%224%22%20fill%3D%22%2328533a%22%20opacity%3D%22.25%22/%3E%0A%20%20%20%20%3Ctext%20x%3D%22220%22%20y%3D%22164%22%20font-family%3D%22Arial%2Csans-serif%22%20font-size%3D%2237%22%20font-weight%3D%22700%22%20fill%3D%22%2328533a%22%3ELIBRISWAP%3C/text%3E%0A%20%20%20%20%3Ctext%20x%3D%22220%22%20y%3D%22213%22%20font-family%3D%22Arial%2Csans-serif%22%20font-size%3D%2217%22%20letter-spacing%3D%222%22%20fill%3D%22%2328533a%22%3ELIBRO%20REUTILIZADO%3C/text%3E%0A%20%20%20%20%3Ccircle%20cx%3D%22420%22%20cy%3D%22310%22%20r%3D%2242%22%20fill%3D%22%2328533a%22%20opacity%3D%22.12%22/%3E%0A%20%20%20%20%3Cpath%20d%3D%22M400%20310%20l15%2015%2030%20-36%22%20fill%3D%22none%22%20stroke%3D%22%2328533a%22%20stroke-width%3D%229%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22/%3E%0A%20%20%20%20%3Ctext%20x%3D%22220%22%20y%3D%22355%22%20font-family%3D%22Arial%2Csans-serif%22%20font-size%3D%2217%22%20font-weight%3D%22700%22%20fill%3D%22%2328533a%22%20opacity%3D%22.7%22%3ELIBRISWAP%20%C2%B7%20SEGUNDA%20VIDA%3C/text%3E%0A%20%20%20%20%3C/svg%3E';
+      img.onerror=()=>{img.src='data:image/svg+xml;charset=UTF-8,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20width%3D%22700%22%20height%3D%22440%22%20viewBox%3D%220%200%20700%20440%22%3E%0A%20%20%20%20%3Crect%20width%3D%22700%22%20height%3D%22440%22%20rx%3D%2228%22%20fill%3D%22%23dcebd7%22/%3E%0A%20%20%20%20%3Cpath%20d%3D%22M0%20330%20Q180%20260%20350%20340%20T700%20315%20V440%20H0Z%22%20fill%3D%22%2328533a%22%20opacity%3D%22.10%22/%3E%0A%20%20%20%20%3Crect%20x%3D%22184%22%20y%3D%2238%22%20width%3D%22330%22%20height%3D%22365%22%20rx%3D%2216%22%20fill%3D%22%2328533a%22%20opacity%3D%22.16%22/%3E%0A%20%20%20%20%3Crect%20x%3D%22166%22%20y%3D%2228%22%20width%3D%22330%22%20height%3D%22365%22%20rx%3D%2216%22%20fill%3D%22%23fff%22%20opacity%3D%22.88%22/%3E%0A%20%20%20%20%3Crect%20x%3D%22166%22%20y%3D%2228%22%20width%3D%2226%22%20height%3D%22365%22%20rx%3D%2210%22%20fill%3D%22%2328533a%22/%3E%0A%20%20%20%20%3Crect%20x%3D%22212%22%20y%3D%2275%22%20width%3D%22238%22%20height%3D%227%22%20rx%3D%224%22%20fill%3D%22%2328533a%22%20opacity%3D%22.25%22/%3E%0A%20%20%20%20%3Ctext%20x%3D%22220%22%20y%3D%22164%22%20font-family%3D%22Arial%2Csans-serif%22%20font-size%3D%2237%22%20font-weight%3D%22700%22%20fill%3D%22%2328533a%22%3ELIBRISWAP%3C/text%3E%0A%20%20%20%20%3Ctext%20x%3D%22220%22%20y%3D%22213%22%20font-family%3D%22Arial%2Csans-serif%22%20font-size%3D%2217%22%20letter-spacing%3D%222%22%20fill%3D%22%2328533a%22%3ELIBRO%20REUTILIZADO%3C/text%3E%0A%20%20%20%20%3Ccircle%20cx%3D%22420%22%20cy%3D%22310%22%20r%3D%2242%22%20fill%3D%22%2328533a%22%20opacity%3D%22.12%22/%3E%0A%20%20%20%20%3Cpath%20d%3D%22M400%20310%20l15%2015%2030%20-36%22%20fill%3D%22none%22%20stroke%3D%22%2328533a%22%20stroke-width%3D%229%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22/%3E%0A%20%20%20%20%3Ctext%20x%3D%22220%22%20y%3D%22355%22%20font-family%3D%22Arial%2Csans-serif%22%20font-size%3D%2217%22%20font-weight%3D%22700%22%20fill%3D%22%2328533a%22%20opacity%3D%22.7%22%3ELIBRISWAP%20%C2%B7%20SEGUNDA%20VIDA%3C/text%3E%0A%20%20%20%20%3C/svg%3E';};
+      const label=document.createElement('span');label.className='cover-label';label.textContent=courseValue;cover.append(img,label);
+      const heading=document.createElement('h3');heading.textContent=title;
+      const meta=document.createElement('p');meta.className='meta';meta.textContent=`Libro de texto · ${condition}`;
+      const tags=document.createElement('div');tags.className='tag-row';
+      [subjectValue,courseValue].forEach(value=>{const tag=document.createElement('span');tag.className='tag';tag.textContent=value;tags.append(tag);});
+      const bottom=document.createElement('div');bottom.className='card-bottom';
+      const priceEl=document.createElement('span');priceEl.className='price';priceEl.textContent=typeValue==='Intercambio'?'Intercambio':(price?`${price} €`:'Precio a convenir');
+      const button=document.createElement('button');button.className='small-btn contact';button.textContent='Me interesa';button.dataset.book=title;attachContact(button);
+      bottom.append(priceEl,button);card.append(cover,heading,meta,tags,bottom);
+      cardsWrap.prepend(card);
+      e.target.reset();closeModal();search.value='';course.value='';subject.value='';type.value='';activeCategory='todos';
+      chips.forEach(c=>c.classList.toggle('active',c.dataset.filter==='todos'));filterBooks();
+      showToast('¡Libro añadido al catálogo de demostración!');
+      document.getElementById('explorar').scrollIntoView({behavior:'smooth'});
+    });
+
+    const menu=document.getElementById('menu'),navlinks=document.getElementById('navlinks');
+    menu.addEventListener('click',()=>{
+      const opened=navlinks.classList.toggle('open');
+      menu.setAttribute('aria-expanded',String(opened));menu.textContent=opened?'×':'☰';
+    });
+    navlinks.querySelectorAll('a').forEach(link=>link.addEventListener('click',()=>{
+      navlinks.classList.remove('open');menu.setAttribute('aria-expanded','false');menu.textContent='☰';
+    }));
+    document.getElementById('year').textContent=new Date().getFullYear();
+    filterBooks();
+  </script>
+</body>
+</html>
